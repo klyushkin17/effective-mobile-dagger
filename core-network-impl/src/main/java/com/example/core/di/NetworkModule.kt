@@ -7,12 +7,13 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
-    @[Singleton Provides BookRetrofit]
+    @[NetworkScope Provides BookRetrofit]
     fun provideBookRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BaseUrls.BOOK_BASE_URL)
@@ -20,7 +21,7 @@ class NetworkModule {
             .build()
     }
 
-    @[Singleton Provides VacancyRetrofit]
+    @[NetworkScope Provides VacancyRetrofit]
     fun provideVacancyRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BaseUrls.VACANCY_BASE_URL)

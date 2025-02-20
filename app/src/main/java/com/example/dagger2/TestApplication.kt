@@ -8,8 +8,7 @@ import retrofit2.Retrofit
 
 class TestApplication:
     Application(),
-    HomeDependenciesProvider
-{
+    HomeDependenciesProvider {
 
     lateinit var appComponent: AppComponent
 
@@ -18,5 +17,8 @@ class TestApplication:
         appComponent = DaggerAppComponent.factory().create()
     }
 
-    override fun getRetrofit(): Retrofit = appComponent.getRetrofit()
+    //override fun getRetrofit(): Retrofit = appComponent.getRetrofit()
+    override fun getBookRetrofit(): Retrofit = appComponent.getBookRetrofit()
+
+    override fun getVacancyRetrofit(): Retrofit = appComponent.getVacancyRetrofit()
 }

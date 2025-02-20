@@ -2,9 +2,10 @@ package com.example.core.di
 
 import com.example.core_network_api.NetworkApi
 import dagger.Component
+import javax.inject.Scope
 import javax.inject.Singleton
 
-@Singleton
+@NetworkScope
 @Component(modules = [NetworkModule::class])
 interface NetworkComponent: NetworkApi {
 
@@ -29,3 +30,7 @@ interface NetworkComponent: NetworkApi {
         }
     }
 }
+
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class NetworkScope

@@ -1,6 +1,8 @@
 package com.example.home.data.repository
 
 
+import com.example.core.utils.BookRetrofit
+import com.example.core.utils.VacancyRetrofit
 import com.example.home.data.bookData.remote.BookListDto
 import com.example.home.data.bookData.remote.api.BookApi
 import com.example.home.data.vacancyData.remote.VacancyListDto
@@ -12,15 +14,16 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
-    private val retrofit: Retrofit
+    @BookRetrofit private val bookRetrofit: Retrofit,
+    @VacancyRetrofit private val vacancyRetrofit: Retrofit,
 ): Repository {
 
     private val bookApi: BookApi by lazy {
-        retrofit.create(BookApi::class.java)
+        bookRetrofit.create(BookApi::class.java)
     }
 
     private val vacancyApi: VacancyApi by lazy {
-        retrofit.create(VacancyApi::class.java)
+        vacancyRetrofit.create(VacancyApi::class.java)
     }
 
     override suspend fun getBookList(): Flow<BookListDto> = flow {
