@@ -1,6 +1,5 @@
 package com.example.core.di
 
-import android.content.Context
 import com.example.core_network_api.NetworkApi
 import dagger.Component
 import javax.inject.Singleton

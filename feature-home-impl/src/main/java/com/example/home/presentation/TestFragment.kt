@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.home.di.HomeComponent
+import com.example.home.di.HomeDependenciesProvider
 import javax.inject.Inject
 
 
@@ -16,7 +17,8 @@ class TestFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        HomeComponent.init(requireContext()).injectIntoTestFragment(this)
+        HomeComponent.init(requireContext().applicationContext as HomeDependenciesProvider)
+            .injectIntoTestFragment(this)
 
         testViewModel = ViewModelProvider(this, testViewModelFactory)[TestViewModel::class.java]
     }

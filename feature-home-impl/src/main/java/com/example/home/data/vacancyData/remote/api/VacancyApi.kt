@@ -6,12 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface VacancyApi {
-    @GET
-    suspend fun getVacancies(
-        @Url url: String = "${BASE_URL}vacancies.json"
-    ): VacancyListDto
 
-    companion object {
-        const val BASE_URL = "https://klyushkin17.github.io/hh-api/"
-    }
+    @GET("vacancies.json")
+    suspend fun getVacancies(): VacancyListDto
 }

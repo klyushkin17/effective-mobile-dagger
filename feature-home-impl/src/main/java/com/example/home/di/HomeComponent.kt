@@ -1,6 +1,5 @@
 package com.example.home.di
 
-import android.content.Context
 import com.example.core_network_api.NetworkApi
 import com.example.home.presentation.TestFragment
 import dagger.Component
@@ -23,10 +22,8 @@ interface HomeComponent: NetworkApi {
         @Volatile
         private var homeComponent: HomeComponent? = null
 
-        fun init(context: Context): HomeComponent {
+        fun init(deps: HomeDependenciesProvider): HomeComponent {
             if (homeComponent == null) {
-                //val deps = context.getAppComponent()
-                val deps = context.applicationContext as HomeDependenciesProvider
                 homeComponent = DaggerHomeComponent
                     .factory()
                     .create(deps)
