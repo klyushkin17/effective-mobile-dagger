@@ -17,7 +17,6 @@ class TestApplication:
         appComponent = DaggerAppComponent.factory().create()
     }
 
-    //override fun getRetrofit(): Retrofit = appComponent.getRetrofit()
     override fun getBookRetrofit(): Retrofit = appComponent.getBookRetrofit()
 
     override fun getVacancyRetrofit(): Retrofit = appComponent.getVacancyRetrofit()

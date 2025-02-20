@@ -7,16 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.home.data.bookData.remote.BookDto
 import com.example.home.data.vacancyData.remote.VacancyDto
 import com.example.home.domain.repository.Repository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 const val TAG = "HAHAH"
 
 @Suppress("UNCHECKED_CAST")
-class TestViewModel(private val repository: Repository): ViewModel() {
+class TestViewModel(
+    private val dataId: String,
+    private val repository: Repository
+): ViewModel() {
 
     private var _bookListState = MutableStateFlow<List<BookDto>>(emptyList())
     val bookListState = _bookListState.asStateFlow()
@@ -25,6 +30,7 @@ class TestViewModel(private val repository: Repository): ViewModel() {
     val vacancyListState = _vacancyListState.asStateFlow()
 
     init {
+        Log.d(TAG, dataId)
         getData()
     }
 
@@ -42,11 +48,18 @@ class TestViewModel(private val repository: Repository): ViewModel() {
         }
     }
 
-    class TestViewModelFactory @Inject constructor(
+    class TestViewModelFactory @AssistedInject constructor(
+        @Assisted("dataId") private val dataId: String,
         private val repository: Repository
     ): ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return TestViewModel(repository) as T
+            return TestViewModel(dataId, repository) as T
+        }
+
+        @AssistedFactory
+        interface Factory {
+
+            fun create(@Assisted("dataId") dataId: String): TestViewModelFactory
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.example.home.presentation
 
-import android.os.Bundle
+import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.home.di.HomeComponent
 import com.example.home.di.HomeDependenciesProvider
 import javax.inject.Inject
@@ -10,16 +10,18 @@ import javax.inject.Inject
 
 class TestFragment : Fragment() {
 
+    private val dataId = "SomeId"
+    private val testViewModel: TestViewModel by viewModels {
+        testViewModelFactoryFactory.create(dataId)
+    }
+
     @Inject
-    lateinit var testViewModelFactory: TestViewModel.TestViewModelFactory
+    lateinit var testViewModelFactoryFactory: TestViewModel.TestViewModelFactory.Factory
 
-    private lateinit var testViewModel: TestViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onAttach(context: Context) {
         HomeComponent.init(requireContext().applicationContext as HomeDependenciesProvider)
             .injectIntoTestFragment(this)
-
-        testViewModel = ViewModelProvider(this, testViewModelFactory)[TestViewModel::class.java]
+        testViewModel
+        super.onAttach(context)
     }
 }

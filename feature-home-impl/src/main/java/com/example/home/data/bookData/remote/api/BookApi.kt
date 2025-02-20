@@ -3,7 +3,6 @@ package com.example.home.data.bookData.remote.api
 import com.example.home.data.bookData.remote.BookListDto
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 interface BookApi {
 

@@ -3,7 +3,6 @@ package com.example.core.di
 import com.example.core_network_api.NetworkApi
 import dagger.Component
 import javax.inject.Scope
-import javax.inject.Singleton
 
 @NetworkScope
 @Component(modules = [NetworkModule::class])
@@ -20,6 +19,7 @@ interface NetworkComponent: NetworkApi {
         private var networkComponent: NetworkComponent? = null
 
         fun init(): NetworkComponent {
+
             if (networkComponent == null) {
                 networkComponent = DaggerNetworkComponent
                     .factory()
