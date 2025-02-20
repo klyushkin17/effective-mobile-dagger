@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(project(":core-network-api"))
     implementation(project(":core-network-impl"))
+    implementation(project(":feature-home-api"))
     implementation(project(":feature-home-impl"))
 
     implementation(libs.androidx.core.ktx)

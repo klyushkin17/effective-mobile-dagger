@@ -25,6 +25,7 @@ interface HomeComponent: NetworkApi {
 
         fun init(context: Context): HomeComponent {
             if (homeComponent == null) {
+                //val deps = context.getAppComponent()
                 val deps = context.applicationContext as HomeDependenciesProvider
                 homeComponent = DaggerHomeComponent
                     .factory()

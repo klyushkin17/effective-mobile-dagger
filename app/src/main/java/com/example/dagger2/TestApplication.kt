@@ -1,15 +1,22 @@
 package com.example.dagger2
 
 import android.app.Application
-import com.example.core.di.NetworkComponent
+import com.example.dagger2.di.AppComponent
+import com.example.dagger2.di.DaggerAppComponent
 import com.example.home.di.HomeDependenciesProvider
 import retrofit2.Retrofit
 
 class TestApplication:
     Application(),
-    HomeDependenciesProvider {
+    HomeDependenciesProvider
+{
 
-    override fun getRetrofit(): Retrofit {
-        return NetworkComponent.init().provideRetrofit()
+    lateinit var appComponent: AppComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        appComponent = DaggerAppComponent.factory().create()
     }
+
+    override fun getRetrofit(): Retrofit = appComponent.getRetrofit()
 }

@@ -37,6 +37,8 @@ dependencies {
 
     implementation(project(":core-network-api"))
     implementation(project(":core-network-impl"))
+    implementation(project(":feature-home-api"))
+    implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
